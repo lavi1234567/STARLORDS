@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="Municipal Corporation Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="document_management.html">Document Management</a></li>
+                <li><a href="workflow_automation.html">Workflow Automation</a></li>
+                <li><a href="employee_collaboration.html">Employee Collaboration</a></li>
+                <li><a href="public_services.html">Public Services</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="login-signup" id="auth-buttons">
+            <a href="login.html">Login</a>
+            <a href="register.html">Sign Up</a>
+        </div>
+        <div id="logout-button" style="display:none;">
+            <button onclick="logout()">Logout</button>
+        </div>
+    </header>
+    <main>
+        <h2>Document Management</h2>
+        <div id="employee-section" style="display:none;">
+            <h3>Upload Documents</h3>
+            <form id="upload-form">
+                <label for="docType">Document Type:</label>
+                <select id="docType" required>
+                    <option value="aadhar">Aadhar Card</option>
+                    <option value="pan">PAN Card</option>
+                    <option value="license">Driving License</option>
+                    <option value="birth">Birth Certificate</option>
+                    <option value="marksheet">Marksheets</option>
+                </select>
+                <label for="file">Choose File:</label>
+                <input type="file" id="file" required>
+                <button type="submit">Upload</button>
+            </form>
+            <div id="uploaded-documents">
+                <h4>Uploaded Documents</h4>
+                <ul id="document-list"></ul>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Municipal Corporation. All rights reserved.</p>
+    </footer>
+    <script src="js/document_management.js"></script>
+</body>
+</html>
