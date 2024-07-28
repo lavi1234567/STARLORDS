@@ -50,3 +50,28 @@ The E-Office System is designed to enhance the efficiency and accessibility of m
    ```bash
    git clone https://github.com/yourusername/e-office-system.git
    cd e-office-system
+
+Usage
+Accessing the Application
+Open public/login.html in your browser.
+Use the seeded login credentials to access the document management and workflow automation features.
+Document Management
+Upload documents using the provided form.
+View and manage uploaded documents.
+Workflow Automation
+View complaints and suggested tasks or tenders.
+Manage active tasks and tenders.
+Employee Collaboration
+View employee profiles and initiate chats.
+Share documents and schedule meetings.
+Security Mechanism
+Monitor network traffic for unauthorized access.
+System automatically shuts down access for unknown or proxy IPs.
+Future Enhancements
+Integrate more advanced analytics for workflow optimization.
+Expand security features to cover more potential threats.
+Continuously improve user experience based on feedback.
+Contribution
+Contributions are welcome! Please fork the repository and submit pull requests for any improvements or bug fixes.
+
+License
