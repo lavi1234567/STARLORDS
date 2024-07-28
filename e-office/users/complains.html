@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Municipality Services Chatbot</title>
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="Municipal Corporation Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="user_dashboard.html">Home</a></li>
+                <li><a href="document_manage.html">Document Management</a></li>
+                <li><a href="public_ser.html">Public Services</a></li>
+                <li><a href="complains.html">Complaints</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container" style="display: flex; padding: 20px;">
+        <div class="sidebar" style="width: 40%; display: flex; flex-direction: column; gap: 20px;">
+            <div class="info-cards" style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="card" style="background-color: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 20px; text-align: center;">
+                    <h3 style="margin: 0 0 10px; color: #007bff;">Complaints Solved</h3>
+                    <p id="complaints-solved" style="margin: 0; font-size: 1.2em;">0</p>
+                </div>
+                <div class="card" style="background-color: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 20px; text-align: center;">
+                    <h3 style="margin: 0 0 10px; color: #007bff;">Total Satisfied Customers</h3>
+                    <p style="margin: 0; font-size: 1.2em;">100+</p>
+                </div>
+                <div class="card" style="background-color: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 20px; text-align: center;">
+                    <h3 style="margin: 0 0 10px; color: #007bff;">24/7 Service</h3>
+                    <p style="margin: 0; font-size: 1.2em;">Yes</p>
+                </div>
+                <div class="card" style="background-color: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 20px; text-align: center;">
+                    <h3 style="margin: 0 0 10px; color: #007bff;">Unique Ref Number</h3>
+                    <p id="unique-ref-number" style="margin: 0; font-size: 1.2em;">-</p>
+                </div>
+            </div>
+            <div class="testimonial" style="background-color: #f8f9fa; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 20px; text-align: center;">
+                <h3 style="margin-top: 0; color: #007bff;">Our Belief</h3>
+                <p style="font-style: italic;">"We always strive to give our best"</p>
+            </div>
+        </div>
+        <div class="chatbot" style="width: 55%; height: calc(100vh - 40px); border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.1); background-color: #fff; display: flex; flex-direction: column; margin-left: 20px;">
+            <div class="chatbot-header" style="background-color: #007bff; color: #fff; padding: 10px; text-align: center; font-weight: bold;">Municipality Chatbot</div>
+            <div class="chatbot-body" id="chatbot-body" style="flex: 1; padding: 20px; overflow-y: auto; border-bottom: 1px solid #ccc;">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="status-check" style="margin: 10px 0; padding: 10px; background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="text" id="status-input" placeholder="Enter your reference number..." style="width: calc(100% - 10px); padding: 5px; margin-bottom: 5px;">
+                <button onclick="checkStatus()" style="padding: 10px; width: 100%; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">Check Status</button>
+            </div>
+            <div class="frequent-complaints" id="frequent-complaints" style="margin: 10px 0; padding: 10px; background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 5px;">
+                <h4 style="margin-top: 0;">Most Frequent Complaints</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li onclick="handleFrequentComplaint('potholes')" style="cursor: pointer; color: #007bff; margin-bottom: 5px;">Potholes</li>
+                    <li onclick="handleFrequentComplaint('garbage collection')" style="cursor: pointer; color: #007bff; margin-bottom: 5px;">Garbage Collection</li>
+                    <li onclick="handleFrequentComplaint('water leakage')" style="cursor: pointer; color: #007bff; margin-bottom: 5px;">Water Leakage</li>
+                </ul>
+            </div>
+            <div class="chatbot-footer" style="display: flex; padding: 10px; border-top: 1px solid #ccc;">
+                <input type="text" id="chatbot-input" placeholder="Type your message..." style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 3px;">
+                <button onclick="sendMessage()" style="margin-left: 10px; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let queryCount = 0;
+        let complaints = [];
+        let complaintsSolved = 0;
+
+        const predefinedComplaints = {
+            "potholes": { refNo: "REF1234567890", phone: "123-456-7890", answer: "We will address the potholes issue within 24 hours. Reference number: REF1234567890" },
+            "garbage collection": { refNo: "REF0987654321", phone: "123-456-7891", answer: "Garbage collection will be scheduled soon. Reference number: REF0987654321" },
+            "water leakage": { refNo: "REF1122334455", phone: "123-456-7892", answer: "Water leakage will be fixed within 12 hours. Reference number: REF1122334455" },
+        };
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            greetUser();
+            generateRandomRefNumber();
+        });
+
+        function greetUser() {
+            displayMessage("Namaste! How can I assist you with municipality services today?", 'bot');
+        }
+
+        function generateRefNo() {
+            queryCount++;
+            return `REF${new Date().getTime()}${queryCount}`;
+        }
+
+        function generateRandomRefNumber() {
+            const randomNumber = Math.floor(Math.random() * 1000000);
+            document.getElementById('unique-ref-number').innerText = randomNumber;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbot-input');
+            const message = input.value.trim();
+            if (message) {
+                displayMessage(message, 'user');
+                input.value = '';
+                handleQuery(message);
+            }
+        }
+
+        function displayMessage(message, sender) {
+            const chatbotBody = document.getElementById('chatbot-body');
+            const messageElement = document.createElement('div');
+            messageElement.className = `chatbot-message ${sender}`;
+            messageElement.innerHTML = message;
+            chatbotBody.appendChild(messageElement);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+
+        function handleQuery(message) {
+            const complaintType = message.toLowerCase();
+            if (predefinedComplaints[complaintType]) {
+                const response = predefinedComplaints[complaintType].answer + " Contact: " + predefinedComplaints[complaintType].phone;
+                displayMessage(response, 'bot');
+                // Save the predefined complaint with its refNo and response
+                saveComplaint({ refNo: predefinedComplaints[complaintType].refNo, complaintType, response });
+                complaintsSolved++;
+                document.getElementById('complaints-solved').innerText = complaintsSolved;
+            } else if (message.startsWith("REF")) {
+                // Check the status of a complaint
+                checkStatusFromList(message);
+            } else {
+                // Register a new uncommon complaint
+                const refNo = generateRefNo();
+                const response = `Your complaint has been registered. Reference number: ${refNo}`;
+                displayMessage(response, 'bot');
+                saveComplaint({ refNo, message, response });
+            }
+        }
+
+        function handleFrequentComplaint(complaintType) {
+            if (predefinedComplaints[complaintType]) {
+                const response = predefinedComplaints[complaintType].answer + " Contact: " + predefinedComplaints[complaintType].phone;
+                displayMessage(response, 'bot');
+                // Save the predefined complaint with its refNo and response
+                saveComplaint({ refNo: predefinedComplaints[complaintType].refNo, complaintType, response });
+                complaintsSolved++;
+                document.getElementById('complaints-solved').innerText = complaintsSolved;
+            }
+        }
+
+        function checkStatus() {
+            const input = document.getElementById('status-input');
+            const refNo = input.value.trim();
+            if (refNo) {
+                checkStatusFromList(refNo);
+            }
+        }
+
+        function saveComplaint(data) {
+            complaints.push(data);
+        }
+
+        function checkStatusFromList(refNo) {
+            const complaint = complaints.find(c => c.refNo === refNo);
+            if (complaint) {
+                const statusClass = 'status-progress'; // Assume 'In Progress' for simplicity
+                displayMessage(`Your complaint status: <span class="${statusClass}">In Progress</span>`, 'bot');
+            } else {
+                displayMessage("Invalid reference number.", 'bot');
+            }
+        }
+    </script>
+</body>
+</html>

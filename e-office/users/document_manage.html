@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Office System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/scripts.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            padding: 0;
+            margin: 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .login-signup a {
+            margin-left: 10px;
+        }
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+        .carousel-slide {
+            flex: 0 0 auto;
+            width: 100%;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+        }
+        .introduction, .key-features {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin: 20px;
+        }
+        .key-features .feature {
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .social-media a {
+            color: white;
+            margin: 0 5px;
+        }
+        .form-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .form-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            position: relative;
+        }
+        .form-content h2 {
+            margin-top: 0;
+        }
+        .form-content input, .form-content select, .form-content button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 2px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="videos/background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="content">
+        <header>
+            <img src="images/logo.png" alt="Municipal Corporation Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="user_dashboard.html">Home</a></li>
+                    <li><a href="document_manage.html">Document Management</a></li>
+                    <li><a href="./public_ser.html">Public Services</a></li>
+                    <li><a href="./complains.html">Complaints</a></li>
+                    
+                </ul>
+            </nav>
+            
+        </header>
+        <main>
+            <section class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide">
+                        <img src="images/banner1.png" alt="Banner 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/banner2.png" alt="Banner 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/banner3.jpeg" alt="Banner 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/banner4.png" alt="Banner 4">
+                    </div>
+                </div>
+            </section>
+            <section class="introduction">
+                <h1>Welcome to Indore Municipal Corporation E-Office</h1>
+                <p>Discover a seamless way to access essential services and resources tailored for you. Our dedicated platform empowers residents and employees alike to engage efficiently with various municipal services, from document management to collaborative projects.</p>
+                <p>Experience a vibrant community where your needs are prioritized. Whether you're a resident seeking important documents or an employee collaborating on vital initiatives, we have the tools to streamline your tasks and enhance communication.</p>
+            </section>
+            <h1>Key Features</h1>
+            <section class="key-features">
+                <div class="feature">
+                    <h3>Centralized Document Management</h3>
+                </div>
+                <div class="feature">
+                    <h3>Workflow Automation</h3>
+                </div>
+                <div class="feature">
+                    <h3>Public Services Accessibility</h3>
+                </div>
+                <div class="feature">
+                    <h3>Secure and Scalable System</h3>
+                </div>
+            </section>
+            <section class="document-management">
+                <h2>Document Management</h2>
+                <div>
+                    <label for="document-type">Select Document Type:</label>
+                    <select id="document-type" required>
+                        <option value="aadhar">Aadhar Card</option>
+                        <option value="pan">PAN Card</option>
+                        <option value="driving">Driving License</option>
+                        <option value="birth">Birth Certificate</option>
+                        <option value="marksheet">Marksheets</option>
+                        <option value="blank_cheque">Blank Cheque</option>
+                    </select>
+                    <input type="file" id="document-file" required>
+                    <button type="button" onclick="uploadDocument()">Upload</button>
+                </div>
+                <div id="status-message" class="hidden"></div>
+                <div id="uploaded-documents">
+                    <h3>Uploaded Documents</h3>
+                    <div id="document-container"></div>
+                    <button id="share-button" class="hidden" onclick="shareDocuments()">Share</button>
+                </div>
+            </section>
+            <section id="share-options" class="hidden">
+                <h3>Share Options</h3>
+                <div id="share-links"></div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 Municipal Corporation. All rights reserved.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let loggedIn = true; // Simulate the login status for testing
+
+        document.addEventListener("DOMContentLoaded", displayUploadedDocuments);
+
+        function uploadDocument() {
+            const documentType = document.getElementById('document-type').value;
+            const documentFile = document.getElementById('document-file').files[0];
+            const statusMessage = document.getElementById('status-message');
+
+            if (documentFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const documents = JSON.parse(localStorage.getItem('documents') || '{}');
+                    if (!documents[documentType]) {
+                        documents[documentType] = [];
+                    }
+                    documents[documentType].push(e.target.result);
+                    localStorage.setItem('documents', JSON.stringify(documents));
+                    statusMessage.textContent = "Document uploaded successfully!";
+                    statusMessage.classList.remove('hidden');
+                    displayUploadedDocuments();
+                };
+                reader.readAsDataURL(documentFile);
+            } else {
+                statusMessage.textContent = "Please select a file to upload.";
+                statusMessage.classList.remove('hidden');
+            }
+        }
+
+        function displayUploadedDocuments() {
+            const documentContainer = document.getElementById('document-container');
+            documentContainer.innerHTML = '';
+            const documents = JSON.parse(localStorage.getItem('documents') || '{}');
+            let hasDocuments = false;
+
+            for (const [type, files] of Object.entries(documents)) {
+                const typeHeader = document.createElement('h4');
+                typeHeader.textContent = type;
+                documentContainer.appendChild(typeHeader);
+
+                files.forEach((file, index) => {
+                    hasDocuments = true;
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = `${type}_${index}`;
+                    checkbox.value = file;
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `${type}_${index}`;
+                    label.textContent = `Document ${index + 1}`;
+
+                    documentContainer.appendChild(checkbox);
+                    documentContainer.appendChild(label);
+                    documentContainer.appendChild(document.createElement('br'));
+                });
+            }
+
+            if (hasDocuments) {
+                document.getElementById('share-button').classList.remove('hidden');
+            } else {
+                document.getElementById('share-button').classList.add('hidden');
+            }
+        }
+
+        function shareDocuments() {
+            const checkboxes = document.querySelectorAll('#document-container input[type="checkbox"]:checked');
+            const shareLinks = document.getElementById('share-links');
+            shareLinks.innerHTML = '';
+
+            if (checkboxes.length > 0) {
+                checkboxes.forEach(checkbox => {
+                    const fileLink = document.createElement('a');
+                    fileLink.href = checkbox.value;
+                    fileLink.textContent = `Download ${checkbox.nextSibling.textContent}`;
+                    fileLink.download = checkbox.nextSibling.textContent;
+                    shareLinks.appendChild(fileLink);
+                    shareLinks.appendChild(document.createElement('br'));
+                });
+
+                const emailLink = document.createElement('a');
+                emailLink.href = generateMailtoLink(checkboxes);
+                emailLink.textContent = "Share via Email";
+                emailLink.setAttribute('target', '_blank');
+                shareLinks.appendChild(emailLink);
+                shareLinks.appendChild(document.createElement('br'));
+
+                document.getElementById('share-options').classList.remove('hidden');
+            } else {
+                document.getElementById('share-options').classList.add('hidden');
+            }
+        }
+
+        function generateMailtoLink(checkboxes) {
+            const email = ""; // Default recipient email
+            const subject = "Shared Documents";
+            const body = "Please find the attached documents:\n\n";
+            let mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            checkboxes.forEach(checkbox => {
+                const fileLink = `Download ${checkbox.nextSibling.textContent}: ${checkbox.value}\n`;
+                mailtoLink += encodeURIComponent(fileLink);
+            });
+
+            return mailtoLink;
+        }
+    </script>
+</body>
+</html>

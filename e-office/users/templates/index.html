@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Network Traffic Monitoring Dashboard</h1>
+    <canvas id="trafficChart"></canvas>
+    <script>
+        const ctx = document.getElementById('trafficChart').getContext('2d');
+        const trafficChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Allowed IPs', 'Disallowed IPs'],
+                datasets: [{
+                    label: '# of Packets',
+                    data: [0, 0],
+                    backgroundColor: ['blue', 'red'],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function fetchTrafficData() {
+            fetch('/traffic_data')
+                .then(response => response.json())
+                .then(data => {
+                    trafficChart.data.datasets[0].data = [data.allowed, data.disallowed];
+                    trafficChart.update();
+                });
+        }
+
+        setInterval(fetchTrafficData, 1000); // Fetch data every second
+    </script>
+</body>
+</html>

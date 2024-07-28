@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Services</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/scripts.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            width: 100%;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            padding: 0;
+            margin: 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .login-signup a {
+            margin-left: 10px;
+        }
+        main {
+            display: flex;
+            flex: 1;
+        }
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .service-section {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1 1 calc(50% - 40px); /* Adjust the width to fit two columns */
+        }
+        .service-section h3 {
+            margin-top: 0;
+        }
+        .form-container {
+            margin: 20px 0;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container input,
+        .form-container select,
+        .form-container button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            flex-shrink: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .steps {
+            display: none;
+            margin-left: 20px;
+        }
+        .steps.active {
+            display: block;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+        }
+        .popup-content h3 {
+            margin-top: 0;
+        }
+        .popup-content button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="videos/background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="content">
+        <header>
+            <img src="images/logo.png" alt="Municipal Corporation Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="user_dashboard.html">Home</a></li>
+                    <li><a href="document_manage.html">Document Management</a></li>
+                    <li><a href="public_ser.html">Public Services</a></li>
+                    <li><a href="complains.html">Complaints</a></li>
+                </ul>
+            </nav>
+           
+        </header>
+        <main>
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <a href="#" onclick="toggleSteps(event, 'passport-steps')">Passport</a>
+                        <ul class="steps" id="passport-steps">
+                            <li>Step 1: Gather documents</li>
+                            <li>Step 2: Fill application form</li>
+                            <li>Step 3: Schedule appointment</li>
+                            <li>Step 4: Attend appointment</li>
+                            <li>Step 5: Biometric data capture</li>
+                            <li>Step 6: Document verification</li>
+                            <li>Step 7: Police verification</li>
+                            <li>Step 8: Processing and printing</li>
+                            <li>Step 9: Dispatch</li>
+                            <li>Step 10: Receive passport</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" onclick="toggleSteps(event, 'license-steps')">Driving License</a>
+                        <ul class="steps" id="license-steps">
+                            <li>Step 1: Gather documents</li>
+                            <li>Step 2: Fill application form</li>
+                            <li>Step 3: Schedule test</li>
+                            <li>Step 4: Pass test</li>
+                            <li>Step 5: Biometric data capture</li>
+                            <li>Step 6: Document verification</li>
+                            <li>Step 7: Issue learner's license</li>
+                            <li>Step 8: Practice driving</li>
+                            <li>Step 9: Take driving test</li>
+                            <li>Step 10: Receive license</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" onclick="toggleSteps(event, 'birth-certificate-steps')">Birth Certificate</a>
+                        <ul class="steps" id="birth-certificate-steps">
+                            <li>Step 1: Gather documents</li>
+                            <li>Step 2: Fill application form</li>
+                            <li>Step 3: Submit to local office</li>
+                            <li>Step 4: Verification</li>
+                            <li>Step 5: Issue notice for public display</li>
+                            <li>Step 6: Public review period</li>
+                            <li>Step 7: Correction and amendments</li>
+                            <li>Step 8: Final verification</li>
+                            <li>Step 9: Printing certificate</li>
+                            <li>Step 10: Receive certificate</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" onclick="toggleSteps(event, 'death-certificate-steps')">Death Certificate</a>
+                        <ul class="steps" id="death-certificate-steps">
+                            <li>Step 1: Gather documents</li>
+                            <li>Step 2: Fill application form</li>
+                            <li>Step 3: Submit to local office</li>
+                            <li>Step 4: Verification</li>
+                            <li>Step 5: Issue notice for public display</li>
+                            <li>Step 6: Public review period</li>
+                            <li>Step 7: Correction and amendments</li>
+                            <li>Step 8: Final verification</li>
+                            <li>Step 9: Printing certificate</li>
+                            <li>Step 10: Receive certificate</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" onclick="toggleSteps(event, 'caste-certificate-steps')">Caste Certificate</a>
+                        <ul class="steps" id="caste-certificate-steps">
+                            <li>Step 1: Gather documents</li>
+                            <li>Step 2: Fill application form</li>
+                            <li>Step 3: Submit to local office</li>
+                            <li>Step 4: Verification</li>
+                            <li>Step 5: Issue notice for public display</li>
+                            <li>Step 6: Public review period</li>
+                            <li>Step 7: Correction and amendments</li>
+                            <li>Step 8: Final verification</li>
+                            <li>Step 9: Printing certificate</li>
+                            <li>Step 10: Receive certificate</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" onclick="toggleSteps(event, 'sanitation-steps')">Sanitation</a>
+                        <ul class="steps" id="sanitation-steps">
+                            <li>Step 1: Identify need</li>
+                            <li>Step 2: Submit request</li>
+                            <li>Step 3: Inspection</li>
+                            <li>Step 4: Prepare service plan</li>
+                            <li>Step 5: Service provision</li>
+                            <li>Step 6: Quality check</li>
+                            <li>Step 7: Feedback collection</li>
+                            <li>Step 8: Service review</li>
+                            <li>Step 9: Improvement actions</li>
+                            <li>Step 10: Follow-up</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" onclick="toggleSteps(event, 'health-steps')">Health</a>
+                        <ul class="steps" id="health-steps">
+                            <li>Step 1: Identify need</li>
+                            <li>Step 2: Submit request</li>
+                            <li>Step 3: Schedule appointment</li>
+                            <li>Step 4: Medical consultation</li>
+                            <li>Step 5: Diagnostic tests</li>
+                            <li>Step 6: Prescription and treatment plan</li>
+                            <li>Step 7: Treatment follow-up</li>
+                            <li>Step 8: Health monitoring</li>
+                            <li>Step 9: Feedback collection</li>
+                            <li>Step 10: Follow-up appointment</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="services-container">
+                <div class="service-section" id="application-status">
+                    <h3>Application Status</h3>
+                    <div class="form-container">
+                        <label for="status-application-number">Enter Application Number:</label>
+                        <input type="text" id="status-application-number" required>
+                        <button onclick="checkApplicationStatus()">Check Status</button>
+                    </div>
+                </div>
+                <div class="service-section" id="apply">
+                    <h3>Apply for Services</h3>
+                    <div class="form-container">
+                        <label for="apply-service">Select Service:</label>
+                        <select id="apply-service" required>
+                            <option value="Aadhar">Aadhar Card</option>
+                            <option value="PAN">PAN Card</option>
+                            <option value="License">Driving License</option>
+                            <option value="Birth">Birth Certificate</option>
+                            <option value="Passport">Passport</option>
+                        </select>
+                        <button onclick="applyForService()">Apply</button>
+                        <div id="application-number" class="hidden"></div>
+                    </div>
+                </div>
+                <div class="service-section" id="download">
+                    <h3>Download Documents</h3>
+                    <div class="form-container">
+                        <label for="download-application-number">Enter Application Number or ID:</label>
+                        <input type="text" id="download-application-number" required>
+                        <label for="download-document">Select Document:</label>
+                        <select id="download-document" required>
+                            <option value="Aadhar">Aadhar Card</option>
+                            <option value="PAN">PAN Card</option>
+                            <option value="License">Driving License</option>
+                            <option value="Birth">Birth Certificate</option>
+                            <option value="Passport">Passport</option>
+                        </select>
+                        <button onclick="downloadDocument()">Download</button>
+                    </div>
+                </div>
+                <div class="service-section" id="update">
+                    <h3>Update Information</h3>
+                    <div class="form-container">
+                        <label for="update-document">Select Document:</label>
+                        <select id="update-document" required>
+                            <option value="Aadhar">Aadhar Card</option>
+                            <option value="PAN">PAN Card</option>
+                            <option value="License">Driving License</option>
+                            <option value="Birth">Birth Certificate</option>
+                            <option value="Passport">Passport</option>
+                        </select>
+                        <label for="update-info">Enter Information to Update:</label>
+                        <input type="text" id="update-info" required>
+                        <button onclick="updateInformation()">Update</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2024 Municipal Corporation. All rights reserved.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </footer>
+    </div>
+
+    <div class="popup" id="statusPopup">
+        <div class="popup-content">
+            <h3>Application Status</h3>
+            <p id="completionDate">Completion Date: </p>
+            <p id="completionTime">Completion Time: </p>
+            <p id="currentPhase">Current Phase: </p>
+            <p id="nextPhase">Next Phase: </p>
+            <button onclick="closeStatusPopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function checkApplicationStatus() {
+            const applicationNumber = document.getElementById('status-application-number').value;
+            // Mock data for demonstration
+            const statusData = {
+                completionDate: '2024-12-31',
+                completionTime: '15:00',
+                currentPhase: 'Verification',
+                nextPhase: 'Approval'
+            };
+            document.getElementById('completionDate').textContent = `Completion Date: ${statusData.completionDate}`;
+            document.getElementById('completionTime').textContent = `Completion Time: ${statusData.completionTime}`;
+            document.getElementById('currentPhase').textContent = `Current Phase: ${statusData.currentPhase}`;
+            document.getElementById('nextPhase').textContent = `Next Phase: ${statusData.nextPhase}`;
+            document.getElementById('statusPopup').style.display = 'flex';
+        }
+
+        function closeStatusPopup() {
+            document.getElementById('statusPopup').style.display = 'none';
+        }
+
+        function applyForService() {
+            const service = document.getElementById('apply-service').value;
+            const applicationNumber = `APP${new Date().getTime()}`;
+            alert(`Application for ${service} submitted successfully! Your application number is ${applicationNumber}.`);
+            document.getElementById('application-number').textContent = `Your Application Number: ${applicationNumber}`;
+            document.getElementById('application-number').classList.remove('hidden');
+        }
+
+        function downloadDocument() {
+            const applicationNumber = document.getElementById('download-application-number').value;
+            const documentType = document.getElementById('download-document').value;
+            alert(`Downloading ${documentType} for application number ${applicationNumber}.`);
+        }
+
+        function updateInformation() {
+            const documentType = document.getElementById('update-document').value;
+            const updateInfo = document.getElementById('update-info').value;
+            alert(`Updating ${documentType} with information: ${updateInfo}.`);
+        }
+
+        function toggleSteps(event, stepsId) {
+            event.preventDefault();
+            const steps = document.getElementById(stepsId);
+            steps.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
