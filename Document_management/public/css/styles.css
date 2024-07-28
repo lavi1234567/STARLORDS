@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.login-signup a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+main {
+    padding: 20px;
+}
+
+h2, h3, h4 {
+    color: #007bff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input, form select, form button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#uploaded-documents {
+    margin-top: 20px;
+}
+
+#document-list {
+    list-style: none;
+    padding: 0;
+}
+
+#document-list li {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+footer {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer .social-media a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+footer .social-media a:hover {
+    color: #0056b3;
+}
+
+footer p {
+    margin: 10px 0;
+}
